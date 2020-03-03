@@ -1,7 +1,6 @@
 # GoFPDF document generator
 
-[![No Maintenance
-Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+[![Build](https://travis-ci.org/hbbio/gofpdf.svg?branch=master)](https://travis-ci.org/hbbio/gofpdf)
 [![MIT
 licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/hbbio/gofpdf/master/LICENSE)
 [![Report](https://goreportcard.com/badge/github.com/hbbio/gofpdf)](https://goreportcard.com/report/github.com/hbbio/gofpdf)
