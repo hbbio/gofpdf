@@ -156,7 +156,7 @@ func (t *FpdfTpl) childrenImages() map[string]*ImageInfoType {
 	for x := 0; x < len(t.templates); x++ {
 		imgs := t.templates[x].Images()
 		for key, val := range imgs {
-			name := sprintf("t%s-%s", t.templates[x].ID(), key)
+			name := fmt.Sprintf("t%s-%s", t.templates[x].ID(), key)
 			childrenImgs[name] = val
 		}
 	}

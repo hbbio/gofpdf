@@ -77,7 +77,7 @@ func (f *Fpdf) parsepngstream(buf *bytes.Buffer, readdpi bool) (info *ImageInfoT
 		return
 	}
 	_ = buf.Next(4)
-	dp := sprintf("/Predictor 15 /Colors %d /BitsPerComponent %d /Columns %d", colorVal, bpc, w)
+	dp := fmt.Sprintf("/Predictor 15 /Colors %d /BitsPerComponent %d /Columns %d", colorVal, bpc, w)
 	// Scan chunks looking for palette, transparency and image data
 	pal := make([]byte, 0, 32)
 	var trns []int

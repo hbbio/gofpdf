@@ -868,12 +868,12 @@ func rgbColorValue(r, g, b int, grayStr, fullStr string) (clr colorType) {
 	clr.gray = clr.ir == clr.ig && clr.r == clr.b
 	if len(grayStr) > 0 {
 		if clr.gray {
-			clr.str = sprintf("%.3f %s", clr.r, grayStr)
+			clr.str = fmt.Sprintf("%.3f %s", clr.r, grayStr)
 		} else {
-			clr.str = sprintf("%.3f %.3f %.3f %s", clr.r, clr.g, clr.b, fullStr)
+			clr.str = fmt.Sprintf("%.3f %.3f %.3f %s", clr.r, clr.g, clr.b, fullStr)
 		}
 	} else {
-		clr.str = sprintf("%.3f %.3f %.3f", clr.r, clr.g, clr.b)
+		clr.str = fmt.Sprintf("%.3f %.3f %.3f", clr.r, clr.g, clr.b)
 	}
 	return
 }
@@ -1363,8 +1363,8 @@ func (f *Fpdf) SetAlpha(alpha float64, blendModeStr string) {
 	}
 	f.alpha = alpha
 	f.blendMode = blendModeStr
-	alphaStr := sprintf("%.3f", alpha)
-	keyStr := sprintf("%s %s", alphaStr, blendModeStr)
+	alphaStr := fmt.Sprintf("%.3f", alpha)
+	keyStr := fmt.Sprintf("%s %s", alphaStr, blendModeStr)
 	pos, ok := f.blendMap[keyStr]
 	if !ok {
 		pos = len(f.blendList) // at least 1
@@ -2219,7 +2219,7 @@ func (f *Fpdf) Text(x, y float64, txtStr string) {
 	} else {
 		txt2 = f.escape(txtStr)
 	}
-	s := sprintf("BT %.2f %.2f Td (%s) Tj ET", x*f.k, (f.h-y)*f.k, txt2)
+	s := fmt.Sprintf("BT %.2f %.2f Td (%s) Tj ET", x*f.k, (f.h-y)*f.k, txt2)
 	if f.underline && txtStr != "" {
 		s += " " + f.dounderline(x, y, txtStr)
 	}
@@ -2227,7 +2227,7 @@ func (f *Fpdf) Text(x, y float64, txtStr string) {
 		s += " " + f.dostrikeout(x, y, txtStr)
 	}
 	if f.colorFlag {
-		s = sprintf("q %s %s Q", f.color.text.str, s)
+		s = fmt.Sprintf("q %s %s Q", f.color.text.str, s)
 	}
 	f.out(s)
 }
@@ -2235,7 +2235,7 @@ func (f *Fpdf) Text(x, y float64, txtStr string) {
 // SetWordSpacing sets spacing between words of following text. See the
 // WriteAligned() example for a demonstration of its use.
 func (f *Fpdf) SetWordSpacing(space float64) {
-	f.out(sprintf("%.5f Tw", space*f.k))
+	f.out(fmt.Sprintf("%.5f Tw", space*f.k))
 }
 
 // SetTextRenderingMode sets the rendering mode of following text.
@@ -2251,7 +2251,7 @@ func (f *Fpdf) SetWordSpacing(space float64) {
 // This method is demonstrated in the SetTextRenderingMode example.
 func (f *Fpdf) SetTextRenderingMode(mode int) {
 	if mode >= 0 && mode <= 7 {
-		f.out(sprintf("%d Tr", mode))
+		f.out(fmt.Sprintf("%d Tr", mode))
 	}
 }
 
@@ -2515,7 +2515,7 @@ func (f *Fpdf) Cell(w, h float64, txtStr string) {
 // links or special alignment. See documentation for the fmt package for
 // details on fmtStr and args.
 func (f *Fpdf) Cellf(w, h float64, fmtStr string, args ...interface{}) {
-	f.CellFormat(w, h, sprintf(fmtStr, args...), "", 0, "L", false, 0, "")
+	f.CellFormat(w, h, fmt.Sprintf(fmtStr, args...), "", 0, "L", false, 0, "")
 }
 
 // SplitLines splits text into several lines using the current font. Each line
@@ -2904,7 +2904,7 @@ func (f *Fpdf) Write(h float64, txtStr string) {
 // Writef is like Write but uses printf-style formatting. See the documentation
 // for package fmt for more details on fmtStr and args.
 func (f *Fpdf) Writef(h float64, fmtStr string, args ...interface{}) {
-	f.write(h, sprintf(fmtStr, args...), 0, "")
+	f.write(h, fmt.Sprintf(fmtStr, args...), 0, "")
 }
 
 // WriteLinkString writes text that when clicked launches an external URL. See
@@ -3620,7 +3620,7 @@ func (f *Fpdf) dounderline(x, y float64, txt string) string {
 	up := float64(f.currentFont.Up)
 	ut := float64(f.currentFont.Ut) * f.userUnderlineThickness
 	w := f.GetStringWidth(txt) + f.ws*float64(blankCount(txt))
-	return sprintf("%.2f %.2f %.2f %.2f re f", x*f.k,
+	return fmt.Sprintf("%.2f %.2f %.2f %.2f re f", x*f.k,
 		(f.h-(y-up/1000*f.fontSize))*f.k, w*f.k, -ut/1000*f.fontSizePt)
 }
 
@@ -3628,7 +3628,7 @@ func (f *Fpdf) dostrikeout(x, y float64, txt string) string {
 	up := float64(f.currentFont.Up)
 	ut := float64(f.currentFont.Ut)
 	w := f.GetStringWidth(txt) + f.ws*float64(blankCount(txt))
-	return sprintf("%.2f %.2f %.2f %.2f re f", x*f.k,
+	return fmt.Sprintf("%.2f %.2f %.2f %.2f re f", x*f.k,
 		(f.h-(y+4*up/1000*f.fontSize))*f.k, w*f.k, -ut/1000*f.fontSizePt)
 }
 
@@ -3792,7 +3792,7 @@ func (f *Fpdf) RawWriteBuf(r io.Reader) {
 
 // outf adds a formatted line to the document
 func (f *Fpdf) outf(fmtStr string, args ...interface{}) {
-	f.out(sprintf(fmtStr, args...))
+	f.out(fmt.Sprintf(fmtStr, args...))
 }
 
 // SetDefaultCatalogSort sets the default value of the catalog sort flag that
@@ -3881,7 +3881,7 @@ func (f *Fpdf) putpages() {
 	nb := f.page
 	if len(f.aliasNbPagesStr) > 0 {
 		// Replace number of pages
-		f.RegisterAlias(f.aliasNbPagesStr, sprintf("%d", nb))
+		f.RegisterAlias(f.aliasNbPagesStr, fmt.Sprintf("%d", nb))
 	}
 	f.replaceAliases()
 	if f.defOrientation == "P" {
@@ -4417,7 +4417,7 @@ func (f *Fpdf) putimage(info *ImageInfoType) {
 			cs:    "DeviceGray",
 			bpc:   8,
 			f:     info.f,
-			dp:    sprintf("/Predictor 15 /Colors 1 /BitsPerComponent 8 /Columns %d", int(info.w)),
+			dp:    fmt.Sprintf("/Predictor 15 /Colors 1 /BitsPerComponent 8 /Columns %d", int(info.w)),
 			data:  info.smask,
 			scale: f.k,
 		}
@@ -4659,7 +4659,7 @@ func (f *Fpdf) putcatalog() {
 		f.out("/OpenAction [3 0 R /XYZ null null 1]")
 	}
 	// } 	else if !is_string($this->zoomMode))
-	// 		$this->out('/OpenAction [3 0 R /XYZ null null '.sprintf('%.2f',$this->zoomMode/100).']');
+	// 		$this->out('/OpenAction [3 0 R /XYZ null null '.fmt.Sprintf('%.2f',$this->zoomMode/100).']');
 	switch f.layoutMode {
 	case "single", "SinglePage":
 		f.out("/PageLayout /SinglePage")

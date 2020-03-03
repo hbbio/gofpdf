@@ -19,6 +19,7 @@ package gofpdf
 
 import (
 	"encoding/gob"
+	"fmt"
 	"sort"
 )
 
@@ -96,7 +97,7 @@ func (f *Fpdf) UseTemplateScaled(t Template, corner PointType, size SizeType) {
 		if _, found := existingImages[ti.i]; found {
 			continue
 		}
-		name = sprintf("t%s-%s", t.ID(), name)
+		name = fmt.Sprintf("t%s-%s", t.ID(), name)
 		f.images[name] = ti
 	}
 

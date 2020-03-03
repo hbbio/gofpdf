@@ -16,6 +16,8 @@
 
 package gofpdf
 
+import "fmt"
+
 // Routines in this file are translated from
 // http://www.fpdf.org/en/script/script97.php
 
@@ -108,9 +110,9 @@ func (f *Fpdf) layerPutCatalog() {
 		onStr := ""
 		offStr := ""
 		for _, layer := range f.layer.list {
-			onStr += sprintf("%d 0 R ", layer.objNum)
+			onStr += fmt.Sprintf("%d 0 R ", layer.objNum)
 			if !layer.visible {
-				offStr += sprintf("%d 0 R ", layer.objNum)
+				offStr += fmt.Sprintf("%d 0 R ", layer.objNum)
 			}
 		}
 		f.outf("/OCProperties <</OCGs [%s] /D <</OFF [%s] /Order [%s]>>>>", onStr, offStr, onStr)
