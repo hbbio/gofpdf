@@ -1764,7 +1764,7 @@ func ExampleFpdf_RegisterImageReader() {
 		wd       = 210
 		ht       = 297
 		fontSize = 15
-		urlStr   = "https://github.com/hbbio/gofpdf/blob/master/image/gofpdf.png?raw=true"
+		urlStr   = "https://github.com/hbbio/gofpdf/blob/master/test/image/gofpdf.png?raw=true"
 		msgStr   = `Images from the web can be easily embedded when a PDF document is generated.`
 	)
 

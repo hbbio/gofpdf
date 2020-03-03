@@ -1,8 +1,9 @@
 *.0
 coverage
-font/CalligrapherRegular.json
-font/CalligrapherRegular.z
-font/Ubuntu-*
+test/pdf/*.pdf
+test/font/CalligrapherRegular.json
+test/font/CalligrapherRegular.z
+test/font/Ubuntu-*
 look
 makefont/makefont
 open
