@@ -3,7 +3,7 @@ package httpimg_test
 import (
 	"github.com/hbbio/gofpdf"
 	"github.com/hbbio/gofpdf/contrib/httpimg"
-	"github.com/hbbio/gofpdf/internal/example"
+	"github.com/hbbio/gofpdf/test"
 )
 
 func ExampleRegister() {
@@ -15,9 +15,9 @@ func ExampleRegister() {
 	url := "https://github.com/hbbio/gofpdf/raw/master/image/logo_gofpdf.jpg?raw=true"
 	httpimg.Register(pdf, url, "")
 	pdf.Image(url, 15, 15, 267, 0, false, "", 0, "")
-	fileStr := example.Filename("contrib_httpimg_Register")
+	fileStr := test.Filename("contrib_httpimg_Register")
 	err := pdf.OutputFileAndClose(fileStr)
-	example.Summary(err, fileStr)
+	test.Summary(err, fileStr)
 	// Output:
-	// Successfully generated ../../pdf/contrib_httpimg_Register.pdf
+	// Successfully generated ../../test/pdf/contrib_httpimg_Register.pdf
 }

@@ -7,7 +7,7 @@ import (
 	"github.com/boombuler/barcode/qr"
 	"github.com/hbbio/gofpdf"
 	"github.com/hbbio/gofpdf/contrib/barcode"
-	"github.com/hbbio/gofpdf/internal/example"
+	"github.com/hbbio/gofpdf/test"
 )
 
 func createPdf() (pdf *gofpdf.Fpdf) {
@@ -21,7 +21,7 @@ func createPdf() (pdf *gofpdf.Fpdf) {
 func ExampleRegister() {
 	pdf := createPdf()
 
-	fileStr := example.Filename("contrib_barcode_Register")
+	fileStr := test.Filename("contrib_barcode_Register")
 
 	bcode, err := code128.Encode("gofpdf")
 
@@ -33,9 +33,9 @@ func ExampleRegister() {
 	}
 
 	err = pdf.OutputFileAndClose(fileStr)
-	example.Summary(err, fileStr)
+	test.Summary(err, fileStr)
 	// Output:
-	// Successfully generated ../../pdf/contrib_barcode_Register.pdf
+	// Successfully generated ../../test/pdf/contrib_barcode_Register.pdf
 }
 
 func ExampleRegisterCodabar() {
@@ -46,11 +46,11 @@ func ExampleRegisterCodabar() {
 	var height float64 = 10
 	barcode.BarcodeUnscalable(pdf, key, 15, 15, &width, &height, false)
 
-	fileStr := example.Filename("contrib_barcode_RegisterCodabar")
+	fileStr := test.Filename("contrib_barcode_RegisterCodabar")
 	err := pdf.OutputFileAndClose(fileStr)
-	example.Summary(err, fileStr)
+	test.Summary(err, fileStr)
 	// Output:
-	// Successfully generated ../../pdf/contrib_barcode_RegisterCodabar.pdf
+	// Successfully generated ../../test/pdf/contrib_barcode_RegisterCodabar.pdf
 }
 
 func ExampleRegisterAztec() {
@@ -59,11 +59,11 @@ func ExampleRegisterAztec() {
 	key := barcode.RegisterAztec(pdf, "aztec", 33, 0)
 	barcode.Barcode(pdf, key, 15, 15, 100, 100, false)
 
-	fileStr := example.Filename("contrib_barcode_RegisterAztec")
+	fileStr := test.Filename("contrib_barcode_RegisterAztec")
 	err := pdf.OutputFileAndClose(fileStr)
-	example.Summary(err, fileStr)
+	test.Summary(err, fileStr)
 	// Output:
-	// Successfully generated ../../pdf/contrib_barcode_RegisterAztec.pdf
+	// Successfully generated ../../test/pdf/contrib_barcode_RegisterAztec.pdf
 }
 
 func ExampleRegisterCode128() {
@@ -72,11 +72,11 @@ func ExampleRegisterCode128() {
 	key := barcode.RegisterCode128(pdf, "code128")
 	barcode.Barcode(pdf, key, 15, 15, 100, 10, false)
 
-	fileStr := example.Filename("contrib_barcode_RegisterCode128")
+	fileStr := test.Filename("contrib_barcode_RegisterCode128")
 	err := pdf.OutputFileAndClose(fileStr)
-	example.Summary(err, fileStr)
+	test.Summary(err, fileStr)
 	// Output:
-	// Successfully generated ../../pdf/contrib_barcode_RegisterCode128.pdf
+	// Successfully generated ../../test/pdf/contrib_barcode_RegisterCode128.pdf
 }
 
 func ExampleRegisterCode39() {
@@ -85,11 +85,11 @@ func ExampleRegisterCode39() {
 	key := barcode.RegisterCode39(pdf, "CODE39", false, true)
 	barcode.Barcode(pdf, key, 15, 15, 100, 10, false)
 
-	fileStr := example.Filename("contrib_barcode_RegisterCode39")
+	fileStr := test.Filename("contrib_barcode_RegisterCode39")
 	err := pdf.OutputFileAndClose(fileStr)
-	example.Summary(err, fileStr)
+	test.Summary(err, fileStr)
 	// Output:
-	// Successfully generated ../../pdf/contrib_barcode_RegisterCode39.pdf
+	// Successfully generated ../../test/pdf/contrib_barcode_RegisterCode39.pdf
 }
 
 func ExampleRegisterDataMatrix() {
@@ -98,11 +98,11 @@ func ExampleRegisterDataMatrix() {
 	key := barcode.RegisterDataMatrix(pdf, "datamatrix")
 	barcode.Barcode(pdf, key, 15, 15, 20, 20, false)
 
-	fileStr := example.Filename("contrib_barcode_RegisterDataMatrix")
+	fileStr := test.Filename("contrib_barcode_RegisterDataMatrix")
 	err := pdf.OutputFileAndClose(fileStr)
-	example.Summary(err, fileStr)
+	test.Summary(err, fileStr)
 	// Output:
-	// Successfully generated ../../pdf/contrib_barcode_RegisterDataMatrix.pdf
+	// Successfully generated ../../test/pdf/contrib_barcode_RegisterDataMatrix.pdf
 }
 
 func ExampleRegisterEAN() {
@@ -111,11 +111,11 @@ func ExampleRegisterEAN() {
 	key := barcode.RegisterEAN(pdf, "96385074")
 	barcode.Barcode(pdf, key, 15, 15, 100, 10, false)
 
-	fileStr := example.Filename("contrib_barcode_RegisterEAN")
+	fileStr := test.Filename("contrib_barcode_RegisterEAN")
 	err := pdf.OutputFileAndClose(fileStr)
-	example.Summary(err, fileStr)
+	test.Summary(err, fileStr)
 	// Output:
-	// Successfully generated ../../pdf/contrib_barcode_RegisterEAN.pdf
+	// Successfully generated ../../test/pdf/contrib_barcode_RegisterEAN.pdf
 }
 
 func ExampleRegisterQR() {
@@ -124,11 +124,11 @@ func ExampleRegisterQR() {
 	key := barcode.RegisterQR(pdf, "qrcode", qr.H, qr.Unicode)
 	barcode.Barcode(pdf, key, 15, 15, 100, 10, false)
 
-	fileStr := example.Filename("contrib_barcode_RegisterQR")
+	fileStr := test.Filename("contrib_barcode_RegisterQR")
 	err := pdf.OutputFileAndClose(fileStr)
-	example.Summary(err, fileStr)
+	test.Summary(err, fileStr)
 	// Output:
-	// Successfully generated ../../pdf/contrib_barcode_RegisterQR.pdf
+	// Successfully generated ../../test/pdf/contrib_barcode_RegisterQR.pdf
 }
 
 func ExampleRegisterTwoOfFive() {
@@ -137,11 +137,11 @@ func ExampleRegisterTwoOfFive() {
 	key := barcode.RegisterTwoOfFive(pdf, "1234567895", true)
 	barcode.Barcode(pdf, key, 15, 15, 100, 10, false)
 
-	fileStr := example.Filename("contrib_barcode_RegisterTwoOfFive")
+	fileStr := test.Filename("contrib_barcode_RegisterTwoOfFive")
 	err := pdf.OutputFileAndClose(fileStr)
-	example.Summary(err, fileStr)
+	test.Summary(err, fileStr)
 	// Output:
-	// Successfully generated ../../pdf/contrib_barcode_RegisterTwoOfFive.pdf
+	// Successfully generated ../../test/pdf/contrib_barcode_RegisterTwoOfFive.pdf
 }
 
 func ExampleRegisterPdf417() {
@@ -150,11 +150,11 @@ func ExampleRegisterPdf417() {
 	key := barcode.RegisterPdf417(pdf, "1234567895", 10, 5)
 	barcode.Barcode(pdf, key, 15, 15, 100, 10, false)
 
-	fileStr := example.Filename("contrib_barcode_RegisterPdf417")
+	fileStr := test.Filename("contrib_barcode_RegisterPdf417")
 	err := pdf.OutputFileAndClose(fileStr)
-	example.Summary(err, fileStr)
+	test.Summary(err, fileStr)
 	// Output:
-	// Successfully generated ../../pdf/contrib_barcode_RegisterPdf417.pdf
+	// Successfully generated ../../test/pdf/contrib_barcode_RegisterPdf417.pdf
 }
 
 // TestRegisterCode128 ensures that no panic arises when an invalid barcode is registered.
@@ -175,11 +175,11 @@ func TestBarcodeUnscalable(t *testing.T) {
 	barcode.BarcodeUnscalable(pdf, key, 15, 55, &width, nil, false)
 	barcode.BarcodeUnscalable(pdf, key, 15, 75, nil, nil, false)
 
-	fileStr := example.Filename("contrib_barcode_Barcode")
+	fileStr := test.Filename("contrib_barcode_Barcode")
 	err := pdf.OutputFileAndClose(fileStr)
-	example.Summary(err, fileStr)
+	test.Summary(err, fileStr)
 	// Output:
-	// Successfully generated ../../pdf/contrib_barcode_Barcode.pdf
+	// Successfully generated ../../test/pdf/contrib_barcode_Barcode.pdf
 }
 
 // TestGetUnscaledBarcodeDimensions shows that the width and height returned by the function match that of the barcode
@@ -193,11 +193,11 @@ func TestGetUnscaledBarcodeDimensions(t *testing.T) {
 	pdf.SetDrawColor(255, 0, 0)
 	pdf.Line(15, 15, 15+w, 15+h)
 
-	fileStr := example.Filename("contrib_barcode_GetBarcodeDimensions")
+	fileStr := test.Filename("contrib_barcode_GetBarcodeDimensions")
 	err := pdf.OutputFileAndClose(fileStr)
-	example.Summary(err, fileStr)
+	test.Summary(err, fileStr)
 	// Output:
-	// Successfully generated ../../pdf/contrib_barcode_GetBarcodeDimensions.pdf
+	// Successfully generated ../../test/pdf/contrib_barcode_GetBarcodeDimensions.pdf
 }
 
 // TestBarcodeNonIntegerScalingFactors shows that the barcode may be scaled to non-integer sizes
@@ -214,9 +214,9 @@ func TestBarcodeNonIntegerScalingFactors(t *testing.T) {
 	pdf.SetDrawColor(255, 0, 0)
 	pdf.Line(0.5, 0.5, 0.5+scale, 0.5+scale)
 
-	fileStr := example.Filename("contrib_barcode_BarcodeScaling")
+	fileStr := test.Filename("contrib_barcode_BarcodeScaling")
 	err := pdf.OutputFileAndClose(fileStr)
-	example.Summary(err, fileStr)
+	test.Summary(err, fileStr)
 	// Output:
-	// Successfully generated ../../pdf/contrib_barcode_BarcodeScaling.pdf
+	// Successfully generated ../../test/pdf/contrib_barcode_BarcodeScaling.pdf
 }

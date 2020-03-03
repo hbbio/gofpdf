@@ -21,6 +21,8 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"os"
+	"path/filepath"
 	"sort"
 )
 
@@ -143,4 +145,40 @@ func ComparePDFFiles(file1Str, file2Str string, printDiff bool) (err error) {
 		}
 	}
 	return
+}
+
+// referenceCompare compares the specified file with the file's reference copy
+// located in the 'reference' subdirectory. All bytes of the two files are
+// compared except for the value of the /CreationDate field in the PDF. This
+// function succeeds if both files are equivalent except for their
+// /CreationDate values or if the reference file does not exist.
+func referenceCompare(fileStr string) (err error) {
+	var refFileStr, refDirStr, dirStr, baseFileStr string
+	dirStr, baseFileStr = filepath.Split(fileStr)
+	refDirStr = filepath.Join(dirStr, "reference")
+	err = os.MkdirAll(refDirStr, 0755)
+	if err == nil {
+		refFileStr = filepath.Join(refDirStr, baseFileStr)
+		err = ComparePDFFiles(fileStr, refFileStr, false)
+	}
+	return
+}
+
+// SummaryCompare generates a predictable report for use by test examples. If
+// the specified error is nil, the generated file is compared with a reference
+// copy for byte-for-byte equality. If the files match, then the filename
+// delimiters are normalized and the filename printed to standard output with a
+// success message. If the files do not match, this condition is reported on
+// standard output. If the specified error is not nil, its String() value is
+// printed to standard output.
+func SummaryCompare(err error, fileStr string) {
+	if err == nil {
+		err = referenceCompare(fileStr)
+	}
+	if err == nil {
+		fileStr = filepath.ToSlash(fileStr)
+		fmt.Printf("Successfully generated %s\n", fileStr)
+	} else {
+		fmt.Println(err)
+	}
 }

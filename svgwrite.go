@@ -1,20 +1,6 @@
-/*
- * Copyright (c) 2014 Kurt Jung (Gmail: kurt.w.jung)
- *
- * Permission to use, copy, modify, and distribute this software for any
- * purpose with or without fee is hereby granted, provided that the above
- * copyright notice and this permission notice appear in all copies.
- *
- * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
- * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
- * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
- * ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
- * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
- * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
- * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
- */
-
 package gofpdf
+
+import "github.com/hbbio/gofpdf/svg"
 
 // SVGBasicWrite renders the paths encoded in the basic SVG image specified by
 // sb. The scale value is used to convert the coordinates in the path to the
@@ -23,12 +9,12 @@ package gofpdf
 // (as set with SetLineCapStyle()), line width (as set with SetLineWidth()),
 // and draw color (as set with SetDrawColor()) are used in drawing the image
 // paths.
-func (f *Fpdf) SVGBasicWrite(sb *SVGBasicType, scale float64) {
+func (f *Fpdf) SVGBasicWrite(sb *svg.BasicType, scale float64) {
 	originX, originY := f.GetXY()
 	var x, y, newX, newY float64
 	var cx0, cy0, cx1, cy1 float64
-	var path []SVGBasicSegmentType
-	var seg SVGBasicSegmentType
+	var path []svg.BasicSegmentType
+	var seg svg.BasicSegmentType
 	var startX, startY float64
 	sval := func(origin float64, arg int) float64 {
 		return origin + scale*seg.Arg[arg]

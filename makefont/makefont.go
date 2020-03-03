@@ -1,3 +1,9 @@
+/*
+Command makefont generates a font definition file.
+
+This utility is used to generate a font definition file that allows TrueType
+and Type1 fonts to be used in PDFs produced with the fpdf package.
+*/
 package main
 
 import (

@@ -24,6 +24,8 @@ import (
 	"fmt"
 	"io"
 	"time"
+
+	"github.com/hbbio/gofpdf/svg"
 )
 
 // Version of FPDF from which this package is derived
@@ -459,7 +461,7 @@ type Pdf interface {
 	SetY(y float64)
 	SplitLines(txt []byte, w float64) [][]byte
 	String() string
-	SVGBasicWrite(sb *SVGBasicType, scale float64)
+	SVGBasicWrite(sb *svg.BasicType, scale float64)
 	Text(x, y float64, txtStr string)
 	TransformBegin()
 	TransformEnd()

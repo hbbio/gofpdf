@@ -1,19 +1,3 @@
-/*
- * Copyright (c) 2013 Kurt Jung (Gmail: kurt.w.jung)
- *
- * Permission to use, copy, modify, and distribute this software for any
- * purpose with or without fee is hereby granted, provided that the above
- * copyright notice and this permission notice appear in all copies.
- *
- * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
- * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
- * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
- * ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
- * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
- * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
- * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
- */
-
 package gofpdf
 
 // Utility to generate font definition files
@@ -35,6 +19,8 @@ import (
 	"path/filepath"
 	"strconv"
 	"strings"
+
+	"github.com/hbbio/gofpdf/ttf"
 )
 
 func baseNoExt(fileStr string) string {
@@ -84,13 +70,12 @@ func loadMap(encodingFileStr string) (encList encListType, err error) {
 // getInfoFromTrueType returns information from a TrueType font
 func getInfoFromTrueType(fileStr string, msgWriter io.Writer, embed bool, encList encListType) (info fontInfoType, err error) {
 	info.Widths = make([]int, 256)
-	var ttf TtfType
-	ttf, err = TtfParse(fileStr)
+	font, err := ttf.Parse(fileStr)
 	if err != nil {
 		return
 	}
 	if embed {
-		if !ttf.Embeddable {
+		if !font.Embeddable {
 			err = fmt.Errorf("font license does not allow embedding")
 			return
 		}
@@ -100,33 +85,33 @@ func getInfoFromTrueType(fileStr string, msgWriter io.Writer, embed bool, encLis
 		}
 		info.OriginalSize = len(info.Data)
 	}
-	k := 1000.0 / float64(ttf.UnitsPerEm)
-	info.FontName = ttf.PostScriptName
-	info.Bold = ttf.Bold
-	info.Desc.ItalicAngle = int(ttf.ItalicAngle)
-	info.IsFixedPitch = ttf.IsFixedPitch
-	info.Desc.Ascent = round(k * float64(ttf.TypoAscender))
-	info.Desc.Descent = round(k * float64(ttf.TypoDescender))
-	info.UnderlineThickness = round(k * float64(ttf.UnderlineThickness))
-	info.UnderlinePosition = round(k * float64(ttf.UnderlinePosition))
+	k := 1000.0 / float64(font.UnitsPerEm)
+	info.FontName = font.PostScriptName
+	info.Bold = font.Bold
+	info.Desc.ItalicAngle = int(font.ItalicAngle)
+	info.IsFixedPitch = font.IsFixedPitch
+	info.Desc.Ascent = round(k * float64(font.TypoAscender))
+	info.Desc.Descent = round(k * float64(font.TypoDescender))
+	info.UnderlineThickness = round(k * float64(font.UnderlineThickness))
+	info.UnderlinePosition = round(k * float64(font.UnderlinePosition))
 	info.Desc.FontBBox = fontBoxType{
-		round(k * float64(ttf.Xmin)),
-		round(k * float64(ttf.Ymin)),
-		round(k * float64(ttf.Xmax)),
-		round(k * float64(ttf.Ymax)),
+		round(k * float64(font.Xmin)),
+		round(k * float64(font.Ymin)),
+		round(k * float64(font.Xmax)),
+		round(k * float64(font.Ymax)),
 	}
 	// printf("FontBBox\n")
 	// dump(info.Desc.FontBBox)
-	info.Desc.CapHeight = round(k * float64(ttf.CapHeight))
-	info.Desc.MissingWidth = round(k * float64(ttf.Widths[0]))
+	info.Desc.CapHeight = round(k * float64(font.CapHeight))
+	info.Desc.MissingWidth = round(k * float64(font.Widths[0]))
 	var wd int
 	for j := 0; j < len(info.Widths); j++ {
 		wd = info.Desc.MissingWidth
 		if encList[j].name != ".notdef" {
 			uv := encList[j].uv
-			pos, ok := ttf.Chars[uint16(uv)]
+			pos, ok := font.Chars[uint16(uv)]
 			if ok {
-				wd = round(k * float64(ttf.Widths[pos]))
+				wd = round(k * float64(font.Widths[pos]))
 			} else {
 				fmt.Fprintf(msgWriter, "Character %s is missing\n", encList[j].name)
 			}

@@ -149,7 +149,7 @@ Example PDFs can be compared with reference copies in order to verify
 that they have been generated as expected. This comparison will be
 performed if a PDF with the same name as the example PDF is placed in
 the gofpdf/pdf/reference directory and if the third argument to
-`ComparePDFFiles()` in internal/example/example.go is true. (By default
+`ComparePDFFiles()` in test/test.go is true. (By default
 it is false.) The routine that summarizes an example will look for this
 file and, if found, will call `ComparePDFFiles()` to check the example
 PDF for equality with its reference PDF. If differences exist between
@@ -178,7 +178,7 @@ by calling the MakeFont function or using the included makefont command
 line utility. To create the utility, cd into the makefont subdirectory
 and run “go build”. This will produce a standalone executable named
 makefont. Select the appropriate encoding file from the font
-subdirectory and run the command as in the following example.
+subdirectory and run the command as in the following test.
 
 ```shell
 ./makefont --embed --enc=../font/cp1252.map --dst=../font ../font/calligra.ttf

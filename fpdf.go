@@ -1,25 +1,6 @@
-/*
- * Copyright (c) 2013-2014 Kurt Jung (Gmail: kurt.w.jung)
- *
- * Permission to use, copy, modify, and distribute this software for any
- * purpose with or without fee is hereby granted, provided that the above
- * copyright notice and this permission notice appear in all copies.
- *
- * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
- * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
- * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
- * ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
- * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
- * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
- * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
- */
-
+// Package gofpdf implements a PDF document generator with high level
+// support for text, drawing and images.
 package gofpdf
-
-// Version: 1.7
-// Date:    2011-06-18
-// Author:  Olivier PLATHEY
-// Port to Go: Kurt Jung, 2013-07-15
 
 import (
 	"bytes"
@@ -1153,7 +1134,7 @@ func (f *Fpdf) RoundedRect(x, y, w, h, r float64, corners string, stylestr strin
 // RoundedRectExt behaves the same as RoundedRect() but supports a different
 // radius for each corner. A zero radius means squared corner. See
 // RoundedRect() for more details. This method is demonstrated in the
-// RoundedRect() example.
+// RoundedRect() test.
 func (f *Fpdf) RoundedRectExt(x, y, w, h, rTL, rTR, rBR, rBL float64, stylestr string) {
 	f.roundedRectPath(x, y, w, h, rTL, rTR, rBR, rBL)
 	f.out(fillDrawOp(stylestr))
@@ -1491,7 +1472,7 @@ func (f *Fpdf) ClipRoundedRect(x, y, w, h, r float64, outline bool) {
 // ClipRoundedRectExt behaves the same as ClipRoundedRect() but supports a
 // different radius for each corner, given by rTL (top-left), rTR (top-right)
 // rBR (bottom-right), rBL (bottom-left). See ClipRoundedRect() for more
-// details. This method is demonstrated in the ClipText() example.
+// details. This method is demonstrated in the ClipText() test.
 func (f *Fpdf) ClipRoundedRectExt(x, y, w, h, rTL, rTR, rBR, rBL float64, outline bool) {
 	f.clipNest++
 	f.roundedRectPath(x, y, w, h, rTL, rTR, rBR, rBL)
@@ -2248,7 +2229,7 @@ func (f *Fpdf) SetWordSpacing(space float64) {
 // 5: Stroke text and add to path for clipping
 // 6: Fills then stroke text and add to path for clipping
 // 7: Add text to path for clipping
-// This method is demonstrated in the SetTextRenderingMode example.
+// This method is demonstrated in the SetTextRenderingMode test.
 func (f *Fpdf) SetTextRenderingMode(mode int) {
 	if mode >= 0 && mode <= 7 {
 		f.out(fmt.Sprintf("%d Tr", mode))
@@ -3610,7 +3591,7 @@ func blankCount(str string) (count int) {
 }
 
 // SetUnderlineThickness accepts a multiplier for adjusting the text underline
-// thickness, defaulting to 1. See SetUnderlineThickness example.
+// thickness, defaulting to 1. See SetUnderlineThickness test.
 func (f *Fpdf) SetUnderlineThickness(thickness float64) {
 	f.userUnderlineThickness = thickness
 }

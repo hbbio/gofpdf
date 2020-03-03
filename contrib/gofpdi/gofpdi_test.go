@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"github.com/hbbio/gofpdf"
-	"github.com/hbbio/gofpdf/internal/example"
+	"github.com/hbbio/gofpdf/test"
 )
 
 func ExampleNewImporter() {
@@ -35,11 +35,11 @@ func ExampleNewImporter() {
 	}
 
 	// output
-	fileStr := example.Filename("contrib_gofpdi_Importer")
+	fileStr := test.Filename("contrib_gofpdi_Importer")
 	err := pdf.OutputFileAndClose(fileStr)
-	example.Summary(err, fileStr)
+	test.Summary(err, fileStr)
 	// Output:
-	// Successfully generated ../../pdf/contrib_gofpdi_Importer.pdf
+	// Successfully generated ../../test/pdf/contrib_gofpdi_Importer.pdf
 }
 
 func TestGofpdiConcurrent(t *testing.T) {

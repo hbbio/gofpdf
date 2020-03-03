@@ -3,7 +3,6 @@ coverage
 font/CalligrapherRegular.json
 font/CalligrapherRegular.z
 font/Ubuntu-*
-internal/files/bin/bin
 look
 makefont/makefont
 open
@@ -15,11 +14,5 @@ private
 *.swp
 **/*.test
 .idea/
-doc/body.html
-doc/body.md
-doc/index.html
-doc/index.html.ok
-coverage.html
-
 # macOS
 .DS_Store
